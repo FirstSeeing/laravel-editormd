@@ -1,4 +1,4 @@
-[toc]
+[TOC]
 
 # Editor.md For Laravel5
 
