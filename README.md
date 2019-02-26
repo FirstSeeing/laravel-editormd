@@ -1,7 +1,7 @@
 # Editor.md For Laravel5
 
 ## 介绍
-基于Editor.md实现的laravel的扩展, 参考LaravelChen/laravel-editormd项目，去除七牛云扩展特地版本依赖，如有需要自己在项目中单独扩展(更灵活)
+基于Editor.md实现的laravel的扩展, 参考LaravelChen/laravel-editormd项目，去除七牛云扩展指定版本依赖，如有需要自己在项目中单独扩展(更灵活)
 > Editor.md官网:https://pandao.github.io/editor.md/examples/index.html
 
 ## 效果
