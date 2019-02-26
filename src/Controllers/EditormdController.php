@@ -32,7 +32,7 @@ class EditormdController extends Controller
                 $destpath = config("editormd.upload_path");
                 $savepath = $destpath . date('Ymd', time());
                 if (!is_dir($savepath)) {
-                    mkdir($savepath, 0777, true);
+                    @mkdir($savepath, 0777, true);
                 }
                 $ext = $file->getClientOriginalExtension();
                 if (in_array($ext, ['png', 'jpg', 'jpeg', 'gif'])) {
