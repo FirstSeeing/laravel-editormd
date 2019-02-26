@@ -1,3 +1,5 @@
+[toc]
+
 # Editor.md For Laravel5
 
 ## 介绍
