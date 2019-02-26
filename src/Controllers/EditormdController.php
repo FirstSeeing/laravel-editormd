@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelChen\Editormd\Controllers;
+namespace Zu\Editormd\Controllers;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;

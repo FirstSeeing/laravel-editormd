@@ -1,57 +1,36 @@
 # Editor.md For Laravel5
 
 ## 介绍
-> 介于在Laravel下使用Editor.md这款Markdown编辑器的原因,觉得这款编辑器非常好用，于是做成laravel的扩展，方便使用!
-Editor.md的官网是:https://pandao.github.io/editor.md/examples/index.html
+基于Editor.md实现的laravel的扩展, 参考LaravelChen/laravel-editormd项目，去除七牛云扩展特地版本依赖，如有需要自己在项目中单独扩展(更灵活)
+> Editor.md官网:https://pandao.github.io/editor.md/examples/index.html
 ## 效果图
 ### 默认样式
 ![image](https://github.com/LaravelChen/laravel-editormd/raw/master/images/default.png)
 
-### sublime样式
-![image](https://github.com/LaravelChen/laravel-editormd/raw/master/images/darktwo.png)
-
 ## 安装
-### 使用composer安装扩展(最好翻墙哈哈)
+### 使用composer安装扩展
 ```
-composer require laravelchen/laravel-editormd
+composer require luzucheng59/laravel-editormd
 ```
-### 然后在config/app.php添加provider
+### config/app.php 添加provider
 ```
 'providers' => [
-    LaravelChen\Editormd\EditorMdProvider::class,
-    zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class,
-   ];
+    Zu\Editormd\EditorMdProvider::class,
+];
 ```
 ### 最后生成配置文件
 ```
 php artisan vendor:publish
 ```
 
-### 使用七牛请先在```config/filesystem.php```文件中添加七牛的配置
-```
- 'qiniu' => [
-            'driver' => 'qiniu',
-            'domains' => [
-                'default' => '', //你的七牛域名
-                'https' => '',         //你的HTTPS域名
-                'custom' => '',                //你的自定义域名
-            ],
-            'access_key' => '',  //AccessKey
-            'secret_key' => '',  //SecretKey
-            'bucket' => '',  //Bucket名字
-            'notify_url' => '',  //持久化处理回调地址
-        ],
-```
-
 ## 用法
-### 配置文件的内容(config/editormd.php)
+### 配置(config/editormd.php)
 ```
 <?php
 return [
        'upload_path' => 'uploads/images/',//上传文件的地址
-       'upload_type' => '',//上传的方式qiniu或者本地,默认为本地
+       'upload_type' => '',//上传的方式qiniu或者本地,本地:'',七牛:'qiniu'
        'upload_http' => 'https',//https或者为空
-       //本地:'',七牛:'qiniu'
        'width' => '100%',//宽度建议100%
        'height' => '700',//高度
        'theme' => 'default',//顶部的主题分为default和dark
@@ -70,6 +49,11 @@ return [
        'sequenceDiagram' => 'true',  //开启时序/序列图支持
 ];
 ```
+
+### 七牛云
+使用七牛云存储请先按照扩展: zgldh/qiniu-laravel-storage
+> 参考：https://github.com/zgldh/qiniu-laravel-storage
+
 ### 例子(请在editor_js()之前引用jquery)
 ```
 <!DOCTYPE html>
@@ -94,6 +78,8 @@ return [
 </body>
 </html>
 ```
+
+##
 >OK！一切完成后！尽请使用吧!
 
 

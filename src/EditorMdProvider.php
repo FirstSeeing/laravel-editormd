@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelChen\Editormd;
+namespace Zu\Editormd;
 
 use Illuminate\Support\ServiceProvider;
 

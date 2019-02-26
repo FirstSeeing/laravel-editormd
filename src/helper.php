@@ -50,7 +50,7 @@ if (!function_exists("editor_js")) {
             sequenceDiagram: ' . config('editormd.sequenceDiagram') . ',
             imageUpload: ' . config("editormd.imageUpload") . ',
             imageFormats:["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: "/larvelchen/upload/editormd/image?token=' . csrf_token() .'",
+            imageUploadURL: "/upload/editormd/image?token=' . csrf_token() .'",
         });
     })
 </script>

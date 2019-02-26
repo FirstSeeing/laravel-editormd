@@ -1,3 +1,3 @@
 <?php
 
-Route::post('larvelchen/upload/editormd/image','LaravelChen\Editormd\Controllers\EditormdController@uploadimage');
+Route::post('/upload/editormd/image','Zu\Editormd\Controllers\EditormdController@uploadimage');
