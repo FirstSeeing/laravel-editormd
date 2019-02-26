@@ -32,7 +32,7 @@ if (!function_exists("editor_js")) {
             ext: ".png"
         };
         testEditor = editormd({
-            id: "editormd_id",
+            id: "' . config('editormd.id') . '",
             width: "' . config('editormd.width') . '",
             height:' . config('editormd.height') . ',
             theme: "' . config('editormd.theme') . '",
