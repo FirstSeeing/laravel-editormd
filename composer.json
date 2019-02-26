@@ -1,11 +1,11 @@
 {
-  "name": "laravelchen/laravel-editormd",
-  "description": "laravel-editor-mb",
+  "name": "luzucheng59/laravel-editormd",
+  "description": "laravel-editor-md",
   "license": "MIT",
   "authors": [
     {
-      "name": "LaravelChen",
-      "email": "848407695@qq.com"
+      "name": "zu",
+      "email": "765131678@163.com"
     }
   ],
   "minimum-stability": "dev",
