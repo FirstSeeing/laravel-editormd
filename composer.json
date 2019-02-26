@@ -11,7 +11,7 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=5.3.3",
-    "zgldh/qiniu-laravel-storage": "^0.7.0"
+    "zgldh/qiniu-laravel-storage": "^0.10"
   },
   "autoload": {
     "psr-4": {
