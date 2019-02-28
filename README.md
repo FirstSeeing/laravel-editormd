@@ -31,6 +31,7 @@ php artisan vendor:publish
 ```
 <?php
 return [
+    'id'                 => 'editormd_id',  //textarea 父级元素id
     'upload_path'        => '/upload/images/',//上传文件的地址 需要设置为可写
     'upload_type'        => '',//上传的方式qiniu或者本地, 本地:'',七牛:'qiniu'
     'upload_http'        => '',//https或者为空
@@ -81,7 +82,7 @@ return [
 </body>
 </html>
 ```
-### 解析数据
+### 后端解析数据
 > 参考：https://github.com/luzucheng59/laravel-parsedown
 
 想想还有什么.... 尽请使用吧!
