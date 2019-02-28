@@ -1,11 +1,12 @@
 {
   "name": "luzucheng59/laravel-editormd",
-  "description": "laravel-editor-md",
+  "description": "editor.md for laravel",
+  "keywords": ["laravel", "laravel 5", "editormd", "editor.md", "markdown", "php"],
   "license": "MIT",
   "authors": [
     {
       "name": "zu",
-      "email": "765131678@163.com"
+      "email": "luzucheng59@163.com"
     }
   ],
   "minimum-stability": "dev",
