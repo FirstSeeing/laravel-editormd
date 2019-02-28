@@ -57,7 +57,7 @@ return [
 使用七牛云存储请先安装扩展: zgldh/qiniu-laravel-storage
 > 参考：https://github.com/zgldh/qiniu-laravel-storage
 
-### 例子(请在editor_js()之前引用jquery)
+### blade中显示编辑框 (请在editor_js()之前引用jquery)
 ```
 <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +81,9 @@ return [
 </body>
 </html>
 ```
+### 解析数据
+> 参考：https://github.com/luzucheng59/laravel-parsedown
 
->OK！尽请使用吧!
+想想还有什么.... 尽请使用吧!
 
 
