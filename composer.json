@@ -3,6 +3,7 @@
   "description": "editor.md for laravel",
   "keywords": ["laravel", "laravel 5", "editormd", "editor.md", "markdown", "php"],
   "license": "MIT",
+  "homepage": "https://github.com/luzucheng59/laravel-editormd",
   "authors": [
     {
       "name": "zu",
