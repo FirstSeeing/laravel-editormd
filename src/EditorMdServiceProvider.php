@@ -4,7 +4,7 @@ namespace Zu\Editormd;
 
 use Illuminate\Support\ServiceProvider;
 
-class EditorMdProvider extends ServiceProvider
+class EditorMdServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -32,6 +32,8 @@ class EditorMdProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton('editormd-parse', function () {
+            return new \Parsedown;
+        });
     }
 }

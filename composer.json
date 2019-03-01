@@ -11,7 +11,8 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "php": ">=5.3.3"
+    "php": ">=5.3.3",
+    "erusev/parsedown": "*"
   },
   "autoload": {
     "psr-4": {
@@ -20,5 +21,15 @@
     "files": [
       "src/helper.php"
     ]
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Zu\\Editormd\\EditorMdServiceProvider"
+      ],
+      "aliases": {
+        "EditormdParse": "Zu\\Editormd\\EditorMdFacade"
+      }
+    }
   }
 }

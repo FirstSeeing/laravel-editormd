@@ -1,34 +1,45 @@
-[TOC]
-
 # Editor.md For Laravel5
+最好用的Editor.md编辑器和解析器
 
 ## 介绍
-基于Editor.md实现的laravel的扩展, 参考LaravelChen/laravel-editormd项目，去除七牛云扩展指定版本依赖，如有需要自己在项目中单独扩展(更灵活)
-> Editor.md官网:https://pandao.github.io/editor.md/examples/index.html
+基于Editor.md实现的laravel扩展, 支持七牛云（可独自扩展，去除强制依赖）；支持后端解析markdown文本
+> Editor.md官网: https://pandao.github.io/editor.md/examples/index.html
 
 ## 效果
 ### 默认样式
 [![效果](http://image.luzucheng.com/5c751d6cdfc18_16.png "效果")](http://image.luzucheng.com/5c751d6cdfc18_16.png "效果")
 
 ## 安装
-### 使用composer安装扩展
-```
+### 方法一：使用composer直接安装
+```php
 composer require luzucheng59/laravel-editormd
 ```
-### config/app.php 添加provider
-```
-'providers' => [
-    Zu\Editormd\EditorMdProvider::class,
-];
-```
-### 最后生成配置文件
-```
-php artisan vendor:publish
+### 方法二：编辑composer.json后 直接composer update
+```php
+"require": {
+    "luzucheng59/laravel-editormd": "^2.6"
+},
 ```
 
-## 用法
-### 配置(config/editormd.php)
+## 配置
+### 修改config/app.php(laravel5.5 可省略)
+```php
+'providers' => array(
+    Zu\Editormd\EditorMdServiceProvider::class,
+);
 ```
+```php
+'aliases' => array(
+    'EditormdParse' => Zu\Editormd\EditorMdFacade::class,
+),
+```
+
+### 生成配置文件
+```php
+php artisan vendor:publish
+```
+配置文件：config/editormd.php
+```php
 <?php
 return [
     'id'                 => 'editormd_id',  //textarea 父级元素id
@@ -54,12 +65,13 @@ return [
 ];
 ```
 
-### 七牛云
-使用七牛云存储请先安装扩展: zgldh/qiniu-laravel-storage
-> 参考：https://github.com/zgldh/qiniu-laravel-storage
+## 使用说明
+> #### 存储
+> 如果editormd.php中指定七牛云存储请先安装扩展: zgldh/qiniu-laravel-storage
+> 参考地址：https://github.com/zgldh/qiniu-laravel-storage
 
-### blade中显示编辑框 (请在editor_js()之前引用jquery)
-```
+### 1. 在blade中显示编辑框 (请在editor_js()之前引用jquery)
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,8 +94,16 @@ return [
 </body>
 </html>
 ```
-### 后端解析数据
-> 参考：https://github.com/luzucheng59/laravel-parsedown
+
+### 2. 后端解析数据
+```php
+echo \EditormdParse::parse("#中间填写markdown格式的文本");
+```
+
+## 参考
+- LaravelChen/laravel-editormd
+- erusev/parsedown
+- zgldh/qiniu-laravel-storage
 
 想想还有什么.... 尽请使用吧!
 
