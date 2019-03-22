@@ -1,7 +1,7 @@
 <?php
 return [
     'id'                 => 'editormd_id',  //textarea 父级元素id
-    'upload_path'        => '/upload/images/',  //上传文件的地址
+    'upload_path'        => 'upload/images',  //上传文件的地址
     'upload_type'        => '', //上传的方式qiniu或者本地, 本地:'',七牛:'qiniu'
     'upload_http'        => '',    //https或者为空
     'width'              => '100%', //宽度建议100%

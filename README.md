@@ -1,8 +1,27 @@
 # Editor.md For Laravel5
 最好用的Editor.md编辑器和解析器
 
+更新记录
+==============================
+2019-03-22
+------------------------------
+### 优化存储方式
+- 默认使用editormd.php的配置，为空时使用filesystems的default存储
+- 支持多个云储存，如七牛、阿里云 (单独安装扩展)
+- 解决云存储文件路径错误问题
+
+2019-02-26
+------------------------------
+### 新增功能
+- 新增后端解析方法
+
+2019-01-15
+------------------------------
+### 初始化
+- 项目初始化
+
 ## 介绍
-基于Editor.md实现的laravel扩展, 支持七牛云（可独自扩展，去除强制依赖）；支持后端解析markdown文本
+基于Editor.md实现的laravel扩展, 支持七牛云；支持后端解析markdown文本
 > Editor.md官网: https://pandao.github.io/editor.md/examples/index.html
 
 ## 效果
@@ -43,7 +62,7 @@ php artisan vendor:publish
 <?php
 return [
     'id'                 => 'editormd_id',  //textarea 父级元素id
-    'upload_path'        => '/upload/images/',//上传文件的地址 需要设置为可写
+    'upload_path'        => 'upload/images',//上传文件的地址 需要设置为可写
     'upload_type'        => '',//上传的方式qiniu或者本地, 本地:'',七牛:'qiniu'
     'upload_http'        => '',//https或者为空
     'width'              => 'auto',//宽度建议100%
@@ -65,10 +84,10 @@ return [
 ];
 ```
 
-## 使用说明
-> #### 存储
-> 如果editormd.php中指定七牛云存储请先安装扩展: zgldh/qiniu-laravel-storage
-> 参考地址：https://github.com/zgldh/qiniu-laravel-storage
+## 扩展说明
+> #### 使用云存储
+- [七牛云](https://github.com/zgldh/qiniu-laravel-storage)
+- [阿里云](https://github.com/jacobcyl/Aliyun-oss-storage)
 
 ### 1. 在blade中显示编辑框 (请在editor_js()之前引用jquery)
 ```html
@@ -101,10 +120,11 @@ echo \EditormdParse::parse("#中间填写markdown格式的文本");
 ```
 
 ## 参考
-- LaravelChen/laravel-editormd
 - erusev/parsedown
+- LaravelChen/laravel-editormd
 - zgldh/qiniu-laravel-storage
+- jacobcyl/Aliyun-oss-storage
 
-想想还有什么.... 尽请使用吧!
+想想还有什么.... 敬请使用!
 
 

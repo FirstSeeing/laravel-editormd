@@ -5,19 +5,17 @@ namespace Zu\Editormd\Controllers;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Validator;
-use zgldh\QiniuStorage\QiniuStorage;
 
 class EditormdController extends Controller
 {
     //上传图片的处理
     public function uploadimage(Request $request)
     {
-        //这是根据官网上面上传图片的json返回数据的固定格式
-        //http://www.ipandao.com/editor.md/examples/image-upload.html网址在这里
+        //这是官网上面上传图片的json返回数据的固定格式
         $json = [
             'success' => 0,
             'message' => '',
-            'url' => '',
+            'url'     => '',
         ];
         if ($request->hasFile('editormd-image-file')) {
             $file = $request->file('editormd-image-file');
@@ -30,33 +28,42 @@ class EditormdController extends Controller
             $validator = Validator::make($request->all(), $max, $message);
             if ($validator->passes()) {
                 $destpath = config("editormd.upload_path");
-                $savepath = $destpath . date('Ymd', time());
-                if (!is_dir($savepath)) {
-                    @mkdir($savepath, 0777, true);
-                }
-                $ext = $file->getClientOriginalExtension();
-                if (in_array($ext, ['png', 'jpg', 'jpeg', 'gif'])) {
-                    if (config("editormd.upload_type") === 'qiniu') {
-                        $disk = QiniuStorage::disk('qiniu');
-                        $realpath= $savepath . '/' . uniqid() . '_' . date('s') . '.' . $ext;
-                        $disk->put(basename($realpath), file_get_contents($file));
-                        if (config("editormd.upload_http") === 'https') {
-                            $realurl = $disk->downloadUrl(basename($realpath), 'https');
-                        } else {
-                            $realurl = $disk->downloadUrl(basename($realpath));
+                $savepath = trim($destpath, '/') . '/' . date('Ymd', time());
+                if ($file->isValid()) {
+                    $ext = $file->getClientOriginalExtension();
+                    if (in_array($ext, ['png', 'jpg', 'jpeg', 'gif'])) {
+                        // 获取存储方式，优先使用editormd.php的配置，没有配置时使用filesystems.php的默认配置
+                        $storeType = config("editormd.upload_type");
+                        if ($storeType === '') {
+                            $storeType = config('filesystems.default');
                         }
-                        $json = array_replace($json, ['success' => 1, 'url' => $realurl]);
+                        if ($storeType === '' || $storeType === 'local' || $storeType === 'public') {
+                            // 本地存储
+                            $root = config('filesystems.disks.local.root');
+                            $savepath = rtrim($root, '/'). '/' . $savepath;
+                            if (!is_dir($savepath)) {
+                                @mkdir($savepath, 0777, true);
+                            }
+                            $realpath = $savepath . '/' . uniqid() . '_' . date('s') . '.' . $ext;
+                            $file->move($savepath, $realpath);
+                            $json = array_replace($json, ['success' => 1, 'url' => $realpath]);
+                        } else {
+                            // 云存储
+                            $realpath = $savepath . '/' . uniqid() . '_' . date('s') . '.' . $ext;
+                            $disk = \Storage::disk($storeType);
+                            $disk->put($realpath, file_get_contents($file));
+                            if (config("editormd.upload_http") === 'https') {
+                                $realurl = $disk->url($realpath, 'https');
+                            } else {
+                                $realurl = $disk->url($realpath);
+                            }
+                            $json = array_replace($json, ['success' => 1, 'url' => $realurl]);
+                        }
                     } else {
-                        $realpayh = '/' . $savepath . '/' . uniqid() . '_' . date('s') . '.' . $ext;
-                        if ($file->isValid()) {
-                            $file->move($savepath, $realpayh);
-                            $json = array_replace($json, ['success' => 1, 'url' => $realpayh]);
-                        } else {
-                            $json = array_replace($json, ['success' => 0, 'meassge' => '文件校验失败']);
-                        }
+                        $json = array_replace($json, ['success' => 0, 'meassge' => '文件类型不符合要求']);
                     }
                 } else {
-                    $json = array_replace($json, ['success' => 0, 'meassge' => '文件类型不符合要求']);
+                    $json = array_replace($json, ['success' => 0, 'meassge' => $file->getErrorMessage()]);
                 }
             } else {
                 $json = array_replace($json, ['success' => 0, 'meassge' => $validator->messages()]);
