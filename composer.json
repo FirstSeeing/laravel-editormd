@@ -1,7 +1,7 @@
 {
   "name": "luzucheng59/laravel-editormd",
   "description": "editor.md for laravel",
-  "keywords": ["laravel", "laravel 5", "editormd", "editor.md", "markdown", "php"],
+  "keywords": ["laravel", "laravel 5", "editormd", "editor.md", "markdown", "qiniu", "oss", "阿里云", "php"],
   "license": "MIT",
   "homepage": "https://github.com/luzucheng59/laravel-editormd",
   "authors": [
