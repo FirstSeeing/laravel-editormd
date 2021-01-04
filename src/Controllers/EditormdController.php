@@ -39,13 +39,15 @@ class EditormdController extends Controller
                         }
                         if ($storeType === '' || $storeType === 'local' || $storeType === 'public') {
                             // 本地存储
-                            $root = config('filesystems.disks.local.root');
+                            $root = public_path();
+                            $folder_name = $savepath;
                             $savepath = rtrim($root, '/'). '/' . $savepath;
                             if (!is_dir($savepath)) {
                                 @mkdir($savepath, 0777, true);
                             }
-                            $realpath = $savepath . '/' . uniqid() . '_' . date('s') . '.' . $ext;
-                            $file->move($savepath, $realpath);
+                            $filename = '/' . uniqid() . '_' . date('s') . '.' . $ext;
+                            $file->move($savepath, $filename);
+                            $realpath = '/' . $folder_name . $filename;
                             $json = array_replace($json, ['success' => 1, 'url' => $realpath]);
                         } else {
                             // 云存储
