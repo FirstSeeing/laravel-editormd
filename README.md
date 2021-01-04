@@ -1,4 +1,4 @@
-# Editor.md For Laravel5
+# Editor.md For Laravel8
 最好用的Editor.md编辑器和解析器
 
 更新记录
@@ -55,7 +55,7 @@ composer require luzucheng59/laravel-editormd
 
 ### 生成配置文件
 ```php
-php artisan vendor:publish
+php artisan vendor:publish --provider="Zu\Editormd\EditorMdServiceProvider"
 ```
 配置文件：config/editormd.php
 ```php
